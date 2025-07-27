@@ -2,10 +2,21 @@ import java.net.URI
 
 plugins {
     kotlin("jvm") version "2.0.21"
+    application
 }
 
 group = "com.mikhailovskii"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass.set("MainKt")
+}
+
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = application.mainClass.get()
+    }
+}
 
 repositories {
     mavenCentral()
