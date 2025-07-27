@@ -10,7 +10,7 @@ WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar tg-saver-bot-1.0-SNAPSHOT.jar
 
-RUN jar tf build/libs/tg-saver-bot-1.0-SNAPSHOT.jar | grep MainKt
+RUN ls build/libs
 
 RUN jar tf build/libs/app.jar | grep MainKt
 
