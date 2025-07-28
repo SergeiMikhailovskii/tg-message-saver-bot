@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim AS build
+FROM openjdk:21-jdk-slim AS build
 
 WORKDIR /app
 COPY . .
@@ -7,7 +7,7 @@ RUN ./gradlew clean build -x test
 
 RUN ls build/libs && jar tf build/libs/*.jar | grep MainKt
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:21-jdk-slim
 
 WORKDIR /app
 
