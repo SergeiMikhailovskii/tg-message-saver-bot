@@ -11,10 +11,19 @@ import io.ktor.server.netty.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import java.io.FileInputStream
+import java.util.*
 
 fun main() {
-    val token = System.getenv("TOKEN")
-    val url = System.getenv("URL")
+    val props = Properties()
+    try {
+        FileInputStream("keys.properties").use { props.load(it) }
+    } catch (e: Exception) {
+        println("Failed to load keys.properties: ${e.message}")
+    }
+
+    val token = System.getenv("TOKEN") ?: props.getProperty("TOKEN")
+    val url = System.getenv("URL") ?: props.getProperty("URL")
     val redirects = mutableMapOf<Long, Long>()
 
     val bot = bot {
@@ -26,6 +35,10 @@ fun main() {
             command("config") {
                 val (from, to) = this.args.map(String::toLong)
                 redirects[from] = to
+            }
+            command("chatId") {
+                val chatId = message.chat.id
+                bot.sendMessage(ChatId.fromId(chatId), "Chat id=$chatId")
             }
             command("save") {
                 val targetMessageId = message.replyToMessage?.messageId ?: message.messageId
