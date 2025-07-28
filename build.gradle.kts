@@ -3,6 +3,7 @@ import java.net.URI
 plugins {
     kotlin("jvm") version "2.0.21"
     application
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "com.mikhailovskii"
@@ -16,6 +17,12 @@ tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "com.mikhailovskii.MainKt"
     }
+}
+
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveBaseName.set("tg-saver-bot")
+    archiveClassifier.set("")
+    archiveVersion.set("1.0-SNAPSHOT")
 }
 
 repositories {
