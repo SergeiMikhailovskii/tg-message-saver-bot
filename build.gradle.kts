@@ -9,12 +9,12 @@ group = "com.mikhailovskii"
 version = "1.0-SNAPSHOT"
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("com.mikhailovskii.MainKt")
 }
 
 tasks.withType<Jar> {
     manifest {
-        attributes["Main-Class"] = application.mainClass.get()
+        attributes["Main-Class"] = "com.mikhailovskii.MainKt"
     }
 }
 
