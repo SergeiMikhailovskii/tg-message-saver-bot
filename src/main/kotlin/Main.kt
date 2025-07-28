@@ -13,8 +13,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun main() {
-    val token = "token"
-    val url = "url"
+    val token = System.getenv("TOKEN")
+    val url = System.getenv("URL")
     val redirects = mutableMapOf<Long, Long>()
 
     val bot = bot {
